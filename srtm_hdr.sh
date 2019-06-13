@@ -16,11 +16,18 @@ fnbase=${fn%.*}
 lat=$(echo $fn | cut -c 2-3)
 lon=$(echo $fn | cut -c 5-7)
 ew=$(echo $fn | cut -c 4)
+ns=$(echo $fn | cut -c 1)
 
 #Deal with postive west vs positive east longitude systems
 #Convert everything to positive east 
 if [ "$ew" == "w" ] ; then
     lon=-${lon}
+fi
+
+#Deal with postive south vs positive north latitude systems
+#Convert everything to positive east 
+if [ "$ns" == "s" ] ; then
+    lat=-${lat}
 fi
 
 hdr=${fnbase}.hdr
